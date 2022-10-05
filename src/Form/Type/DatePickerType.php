@@ -1,15 +1,19 @@
 <?php
 
-namespace App\Form\Extension;
+namespace App\Form\Type;
 
-use Symfony\Component\Form\AbstractTypeExtension;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class DateTypeExtension extends AbstractTypeExtension
+class DatePickerType extends AbstractType
 {
+
+    public function getParent()
+    {
+        return DateType::class;
+    }
 
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -23,17 +27,8 @@ class DateTypeExtension extends AbstractTypeExtension
             return array_merge($value, [
                 'autocomplete' => 'off',
                 'data-datepicker-target' => 'input',
-                
+
             ]);
         });
-    }
-
-    /**
-     * Returns an array of extended types.
-     */
-    public static function getExtendedTypes(): iterable
-    {
-        // return [FormType::class] to modify (nearly) every field in the system
-        return [DateType::class, DateTimeType::class];
     }
 }

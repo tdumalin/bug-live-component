@@ -1,13 +1,16 @@
 {% extends "bootstrap_5_layout.html.twig" %}
 
 
-{% block date_widget %}
+{% block date_picker_widget %}
     <div 
         data-live-id="{{ random() }}"
         class="input-group mb-3"
         {{ stimulus_controller('datepicker') }}
     >
         {{ form_widget(form)}}
+        <span class="input-group-text" data-datepicker-target="toggle" style="cursor: pointer">
+            <i class="fa-solid fa-calendar"></i>
+        </span>
     </div>
 {% endblock %}
 

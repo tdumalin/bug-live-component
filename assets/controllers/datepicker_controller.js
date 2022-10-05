@@ -1,17 +1,8 @@
 import { Controller } from '@hotwired/stimulus';
 import datepicker from 'js-datepicker'
 
-/*
- * This is an example Stimulus controller!
- *
- * Any element with a data-controller="hello" attribute will cause
- * this controller to be executed. The name "hello" comes from the filename:
- * hello_controller.js -> "hello"
- *
- * Delete this file or adapt it for your use!
- */
 export default class extends Controller {
-    static targets = ["input"]
+    static targets = ["input", "toggle"]
 
     datepicker;
 
@@ -19,15 +10,27 @@ export default class extends Controller {
         this.datepicker = datepicker(this.inputTarget, {
             customDays: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'],
             customMonths: ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+            onSelect: () => {
+                this.inputTarget.dispatchEvent(new Event('change', { bubbles: true }));
+            },
             formatter: (input, date) => {
                 input.value = date.toLocaleDateString('fr-FR')
             },
         });
+
+        this.toggleTarget.addEventListener('click', this._onToggleClick);
     }
     disconnect() {
         if (this.datepicker) {
             this.datepicker.remove();
             this.datepicker = null;
         }
+
+        this.toggleTarget.removeEventListener('click', this._onToggleClick);
+    }
+
+    _onToggleClick = (e) => {
+        e.stopPropagation();
+        this.datepicker.show();
     }
 }
