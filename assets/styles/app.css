@@ -1,4 +1,4 @@
-@import "../../node_modules/stimulus-datepicker/css/datepicker.css";
+@import '~js-datepicker/dist/datepicker.min.css';
 
 body {
     background-color: lightgray;

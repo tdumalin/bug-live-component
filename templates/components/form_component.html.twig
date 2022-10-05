@@ -1,15 +1,6 @@
 
 <div {{ attributes }}>
     {{ form_start(form) }}
-        {{ form_label(form.date) }}
-        <div 
-            class="input-group mb-3"
-            {{ stimulus_controller('datepicker') }}
-        >
-            {{ form_widget(form.date)}}
-            <span class="input-group-text"  data-datepicker-target="toggle" style="cursor: pointer">Toggle</span>
-        </div>
-        {{ form_errors(form.date) }}
         {{ form_rest(form) }}
 
         <button class="btn btn-primary">Save</button>
